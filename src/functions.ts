@@ -1,23 +1,3 @@
-/*
-
-   Welcome to JS Iteration
-
-   Down below you will find instructions for code to write.
-
-   As you write and save your code, you can look in your terminal where you
-   ran `yarn test` to see if your code is working. The tests continuously check
-   your work each time you save. If a test is failing either you have not yet
-   defined that function or you have not defined it correctly.
-
-   Each section describes WHAT the function is to do. Uncomment the function
-   declaration code and fill in the logic to make the function do the behavior
-   that is requested.
-
-   Once you finish a function and have it correct, the test will tell you if/how
-   the next function is working.
-
-*/
-
 /**
  * 1) Define a function named `yelling` that takes an array of
  * strings as an argument and returns a new array with all
@@ -28,8 +8,9 @@
  */
 
 function yelling(words: string[]): string[] {
-  // Replace the code below with your own code
-  return []
+  return words.map(element => {
+    return element.toUpperCase()
+  })
 }
 
 /**
@@ -43,8 +24,9 @@ function yelling(words: string[]): string[] {
  */
 
 function doubleTrouble(numbers: number[]): number[] {
-  // Replace the code below with your own code
-  return []
+  return numbers.map(element => {
+    return element * 2
+  })
 }
 
 /*
@@ -57,8 +39,23 @@ function doubleTrouble(numbers: number[]): number[] {
  */
 
 function stringyIndexes(strings: string[]): string[] {
-  // Replace the code below with your own code
-  return []
+  return strings.map((element, i) => {
+    return element + ` is at index ` + i
+  })
+  /*
+   * ^^^^^^^ Or, could have used interpolation for adding "i" within the string
+   */
+
+  /**
+   * return strings.map(element => {
+   *   return element + ` is at index ${strings.indexOf(element)}`
+   * })
+   */
+  /** Lauren's solution:
+   *    return strings.map((string,index) => `${string} is at index ${index}`)
+   *
+   * So... is "i" or "index" a built in argument / (predicate)? Whatever it's called...
+   */
 }
 
 /*
@@ -70,8 +67,7 @@ function stringyIndexes(strings: string[]): string[] {
  */
 
 function onlyTheEvenSurvive(numbers: number[]): number[] {
-  // Replace the code below with your own code
-  return []
+  return numbers.filter(element => element % 2 == 0)
 }
 
 /*
@@ -83,8 +79,7 @@ function onlyTheEvenSurvive(numbers: number[]): number[] {
  */
 
 function onlyTheEvenIndexedSurvive(numbers: number[]): number[] {
-  // Replace the code below with your own code
-  return []
+  return numbers.filter((number, i) => i % 2 === 0)
 }
 
 /*
@@ -109,11 +104,17 @@ type Movie = {
   year: number
   score: number
 }
-function bestMoviesOfTheYear(movieObjectArray: Movie[], year: number): string[] {
-  // Replace the code below with your own code
-  return []
+function bestMoviesOfTheYear(
+  movieObjectArray: Movie[],
+  year: number
+): string[] {
+  // return movieObjectArray.map(movie => movie.name)
+  const transformedMovieObjectArray = Object.entries(movieObjectArray)
+  const selectedMovieTitles = transformedMovieObjectArray.filter(
+    ([key, value]) => value.score > 90 && value.year === year
+  )
+  return selectedMovieTitles.map(([key, movie]) => movie.name)
 }
-
 /*
  * 7) Define a function everyoneIsOdd that accepts an array of
  * numbers and returns true if every element of the array is
@@ -124,8 +125,7 @@ function bestMoviesOfTheYear(movieObjectArray: Movie[], year: number): string[] 
  */
 
 function everyoneIsOdd(numbers: number[]): boolean {
-  // Replace the code below with your own code
-  return false
+  return numbers.every(number => number % 2 !== 0)
 }
 
 /*
@@ -138,8 +138,9 @@ function everyoneIsOdd(numbers: number[]): boolean {
  */
 
 function findTheNeedle(strings: string[]): string {
-  // Replace the code below with your own code
-  return ''
+  //return strings.filter(word => word.includes('needle')).toString()
+  // or...
+  return strings.find(string => string.match('needle')) || ' '
 }
 
 /*
@@ -152,8 +153,8 @@ function findTheNeedle(strings: string[]): string {
  */
 
 function findTheNeedleIndex(strings: string[]): number {
-  // Replace the code below with your own code
-  return 42
+  //return strings.indexOf(string => string.match('needle')) <---- doesn't work
+  return strings.findIndex(string => string.match('needle'))
 }
 
 /*
@@ -166,8 +167,8 @@ function findTheNeedleIndex(strings: string[]): number {
  */
 
 function someoneToLove(strings: string[]): boolean {
-  // Replace the code below with your own code
-  return false
+  // return strings.find(word => word.length === 4) <----- why not work?
+  return strings.some(string => string.length === 4)
 }
 
 /*
